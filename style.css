@@ -1,0 +1,89 @@
+html,
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: black;
+    overflow: hidden;
+}
+
+@font-face {
+    font-family: digitalClock;
+    src: url(font.ttf);
+}
+
+#grid-cont {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    height: 100vh;
+}
+
+#upper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#time-container {
+    color: white;
+    font-family: digitalClock;
+    font-size: min(0.9 * (100vh - 60px), 100vw / 3);
+}
+
+#footer {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+button {
+    font-family: Arial, sans-serif;
+    background-color: #888;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    color: black;
+    font-size: 1.1em;
+    border-radius: 0;
+    margin-bottom: 20px;
+    height: 40px;
+    line-height: 40px;
+    width: 190px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.minus #time-container {
+    color: cornflowerblue !important;
+}
+
+.minus #footer button {
+    background-color: cornflowerblue !important;
+}
+
+button:active,
+button:focus {
+    outline: none;
+}
+
+button:hover {
+    background-color: white;
+}
+
+button:first-of-type,
+button:last-of-type {
+    width: 100px;
+}
+
+
+/*
+button:first-of-type {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+button:last-of-type {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}*/

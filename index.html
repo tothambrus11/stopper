@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stopper</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="grid-cont">
+        <div id="upper">
+            <span id="time-container">00:00:00</span>
+        </div>
+        <div id="footer">
+            <button onclick="start()">START</button>
+            <button onclick="startVissza()">VISSZASZÁMLÁLÁS</button>
+            <button onclick="stop()">STOP</button>
+        </div>
+    </div>
+
+    <script>
+        let tc = document.getElementById("time-container");
+
+        let interval;
+        let startDate;
+
+        function start() {
+            if (interval) {
+                clearInterval(interval);
+            }
+            startDate = new Date();
+            interval = setInterval(updateView, 1000);
+            updateView();
+        }
+
+        function startVissza() {
+            if (interval) {
+                clearInterval(interval);
+            }
+            startDate = new Date();
+            startDate.setTime(startDate.getTime() + 1000 * 60 * 3);
+            interval = setInterval(updateView, 1000);
+            updateView();
+        }
+
+        function updateView() {
+            let now = new Date();
+            let seconds = Math.round((now.getTime() - startDate.getTime()) / 1000)
+            let isMinus = false;
+            if (seconds < 0) {
+                isMinus = true;
+                seconds = -seconds;
+            }
+
+            const hours = Math.floor(seconds / 3600);
+            seconds -= hours * 3600;
+            const minutes = Math.floor(seconds / 60);
+            seconds -= minutes * 60;
+            tc.innerText = `${pad(hours)}:${pad(minutes)}:${pad(seconds)}`;
+            if (isMinus) {
+                document.body.classList.add("minus")
+            } else {
+                document.body.classList.remove("minus")
+            }
+        }
+
+        function pad(num) {
+            if (num < 10) {
+                return "0" + num;
+            }
+            return String(num);
+        }
+
+        function stop() {
+            if (interval) {
+                clearInterval(interval);
+            }
+        }
+    </script>
+</body>
+
+</html>
